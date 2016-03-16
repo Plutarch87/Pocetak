@@ -1,6 +1,6 @@
 <?php
 
-class ApartmentController extends \BaseController {
+class UserController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -9,7 +9,7 @@ class ApartmentController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('apartments/index');	
+		return View::make('users/index');
 	}
 
 
@@ -20,7 +20,7 @@ class ApartmentController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		return View::make('users/create');
 	}
 
 

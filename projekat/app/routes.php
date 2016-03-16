@@ -13,12 +13,21 @@
 
 Route::get('/', function()
 {
-	return View::make('apartments.index');
+	return View::make('hello');
 });
 
 // Route::get('apartments', array('uses' => 'ApartmentController@index'));
 
 Route::group(array('prefix' => '/apartments'), function()
 {
-	Route::get('/', array('uses' => 'ApartmentController@get_index', 'as' => 'apartments-home'));
+	Route::get('/', array('uses' => 'ApartmentController@index', 'as' => 'apartments-home'));
+});
+
+Route::group(array('prefix' => '/users'), function()
+{
+	Route::get('/', array('uses' => 'UserController@index', 'as' => 'users-home'));
+
+	Route::get('/create', array('uses' => 'UserController@create'));
+
+	
 });

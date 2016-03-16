@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateApartmentsTable extends Migration {
+class CreateUsersTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,17 @@ class CreateApartmentsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('apartments', function($table){
+		Schema::create('users', function($table)
+		{
 			$table->increments('id');
 			$table->string('name');
-			$table->text('descr');
+			$table->string('l_name');
+			$table->string('company');
+			$table->string('country');
+			$table->text('email');
+			$table->text('password');
 			$table->timestamps();
-			});
+		});
 	}
 
 	/**
@@ -27,7 +32,7 @@ class CreateApartmentsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('apartments');
+		Schema::drop('users');
 	}
 
 }
