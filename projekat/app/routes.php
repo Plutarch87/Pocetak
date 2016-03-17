@@ -18,19 +18,16 @@ Route::get('/', function()
 
 // Route::get('apartments', array('uses' => 'ApartmentController@index'));
 
-Route::group(array('prefix' => '/apartments'), function()
-{
-	Route::get('/', array(
+Route::get('/apartments', array(
 		'uses' => 'ApartmentController@index', 
 		'as' => 'apartments-home'
 		));
-});
+
 
 Route::group(array('prefix' => '/users'), function()
 {
-	Route::get('/users', array(
-		'uses' => 'UserController@index', 
-		'as' => 'users-home'
+	Route::get('/', array(
+		'uses' => 'UserController@index'		
 		));
 
 	Route::get('/create', array(
@@ -41,11 +38,8 @@ Route::group(array('prefix' => '/users'), function()
 Route::group(array('prefix' => '/users'), function()
 {
 	Route::post('/', array(
-		'uses' => 'UserController@store'
-		));
-
-	Route::get('/', array(
-		'uses' => 'UserController@show'
+		'uses' => 'UserController@store',
+		'as' => 'register-user'
 		));
 });
 

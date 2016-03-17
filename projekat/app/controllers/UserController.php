@@ -1,7 +1,8 @@
 <?php
 
-class UserController extends \BaseController {
+class UserController extends BaseController {
 
+	
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -9,7 +10,8 @@ class UserController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('users/index');
+
+		return View::make('users.index');
 	}
 
 
@@ -20,7 +22,7 @@ class UserController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('users/create');
+		return View::make('users.create');
 	}
 
 
@@ -32,28 +34,15 @@ class UserController extends \BaseController {
 	public function store()
 	{
 		//$input = Input::get('name', 'l_name', 'email', 'password', 'company');
-
 		$input = Input::all();
-
-		$validator = Validator::make(
-			array(
-				$input
-				),
-			array(
-			'name' => 'required|min:5',
-			'l_name' => 'required|min:5',
-			'email' => 'required|email',
-			'password' => 'required|min:8',
-			'company' => 'required|min:5'
-			));
-
+		$rules = array('name' => 'required|min:5', 'l_name' => 'required|min:5', 'email' => 'required|unique:users');		
 		
-
-		if ($validator->fails()) 
+		$validator = Validator::make(Input::all(), $rules);
+		if($validator->fails())
 		{
-			return Redirect::to('/users/create')->withInput(Input::except('password'));
+			return Redirect::to('users/create')->withErrors($validator);
 		} else {
-			return Redirect::to('index')->with('message', 'Success!');
+		DB::table('users')->insert($input);
 		}
 	}
 
