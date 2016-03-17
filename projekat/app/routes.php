@@ -20,14 +20,32 @@ Route::get('/', function()
 
 Route::group(array('prefix' => '/apartments'), function()
 {
-	Route::get('/', array('uses' => 'ApartmentController@index', 'as' => 'apartments-home'));
+	Route::get('/', array(
+		'uses' => 'ApartmentController@index', 
+		'as' => 'apartments-home'
+		));
 });
 
 Route::group(array('prefix' => '/users'), function()
 {
-	Route::get('/', array('uses' => 'UserController@index', 'as' => 'users-home'));
+	Route::get('/users', array(
+		'uses' => 'UserController@index', 
+		'as' => 'users-home'
+		));
 
-	Route::get('/create', array('uses' => 'UserController@create'));
-
-	
+	Route::get('/create', array(
+		'uses' => 'UserController@create'
+		));
 });
+
+Route::group(array('prefix' => '/users'), function()
+{
+	Route::post('/', array(
+		'uses' => 'UserController@store'
+		));
+
+	Route::get('/', array(
+		'uses' => 'UserController@show'
+		));
+});
+

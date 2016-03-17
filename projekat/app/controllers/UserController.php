@@ -31,7 +31,30 @@ class UserController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		//$input = Input::get('name', 'l_name', 'email', 'password', 'company');
+
+		$input = Input::all();
+
+		$validator = Validator::make(
+			array(
+				$input
+				),
+			array(
+			'name' => 'required|min:5',
+			'l_name' => 'required|min:5',
+			'email' => 'required|email',
+			'password' => 'required|min:8',
+			'company' => 'required|min:5'
+			));
+
+		
+
+		if ($validator->fails()) 
+		{
+			return Redirect::to('/users/create')->withInput(Input::except('password'));
+		} else {
+			return Redirect::to('index')->with('message', 'Success!');
+		}
 	}
 
 
@@ -43,7 +66,7 @@ class UserController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		
 	}
 
 
