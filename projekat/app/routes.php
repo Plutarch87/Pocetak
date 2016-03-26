@@ -26,6 +26,7 @@ Route::get('/apartments', array(
 
 Route::group(array('prefix' => '/users'), function()
 {
+	
 	Route::get('/', array(
 		'uses' => 'UserController@index'		
 		));
@@ -33,13 +34,32 @@ Route::group(array('prefix' => '/users'), function()
 	Route::get('/create', array(
 		'uses' => 'UserController@create'
 		));
+
+	Route::get('/login', array(
+		'uses' => 'UserController@getLogin',
+		'as' => 'login-user'
+		));
 });
 
 Route::group(array('prefix' => '/users'), function()
 {
-	Route::post('/', array(
+
+	Route::post('/create', array(
 		'uses' => 'UserController@store',
 		'as' => 'register-user'
+		));
+
+	Route::post('/login', array(
+		'uses' => 'UserController@postLogin',
+		'as' => 'postLogin'
+		));
+});
+
+Route::group(array('before' => 'auth'), function()
+{
+	Route::get('/users/edit', array(
+		'uses' => 'UserController@edit',
+		'as' => 'edit-profile'
 		));
 });
 

@@ -5,24 +5,29 @@
 </head>
 <body>
 	<h1>New User</h1>
-		{{ Form::open(array('action' => 'UserController@store')) }}
+	{{ $messages = false }}
+		{{ Form::open(array('post' => 'UserController@store')) }}
 			<label for="name">Name:</label>
 				<input type="text" name="name"></input>
-			<label for="name">Last Name:</label>
+				@if($errors->has('name'))
+					{{ $errors->first('name')}}
+				@endif
+			<label for="l_name">Last Name:</label>
 				<input type="text" name="l_name"></input>
-			<label for="name">Email:</label>
-				<input type="email" name="email"></input>
-			<label for="name">Password:</label>
+				@if($errors->has('l_name'))
+					{{ $errors->first('l_name')}}
+				@endif
+			<label for="email">Email:</label>
+				<input type="email" name="email"></input>				
+			<label for="password">Password:</label>
 				<input type="password" name="password"></input>
-			<label for="name">Company Name:</label>
+				@if($errors->has('password'))
+					{{ $errors->first('password')}}
+				@endif
+			<label for="company">Company Name:</label>
 				<input type="text" name="company"></input>
-			<select name="country"  form="new_user">
-				<option value="Serbia">Serbia</option>
-				<option value="Serbia">Serbia</option>
-				<option value="Serbia">Serbia</option>
-				<option value="Serbia">Serbia</option>
-			</select>
-			<input type="submit"></input>
+		{{ Form::select('size', array('L' => 'Serbia', 'S' => 'Yugoslavia'), 'S')	}}
+			{{ Form::submit('Register') }}
 		{{ Form::close() }}
 	</form>
 	<br />

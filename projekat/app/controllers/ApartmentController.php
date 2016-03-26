@@ -9,7 +9,7 @@ class ApartmentController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('apartments/index');	
+		return View::make('apartments.index');	
 	}
 
 
